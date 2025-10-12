@@ -1,0 +1,12 @@
+# Large media files - don't commit to git
+media/sessions/*.wav
+media/sessions/*.aif
+media/sessions/*.aiff
+media/samples/*.wav
+media/samples/*.aif
+media/samples/*.aiff
+
+# Keep directory structure
+!media/.gitkeep
+!media/sessions/.gitkeep
+!media/samples/.gitkeep

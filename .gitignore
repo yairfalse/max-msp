@@ -1,0 +1,50 @@
+# Max/MSP specific
+*.maxhelp
+*.mxo
+*.mxe
+*.mxe64
+.DS_Store
+*.db
+
+# Backup files
+*.bak
+*~
+
+# Media files (optional - uncomment if you don't want to track large audio files)
+# ivo-album/media/**/*.wav
+# ivo-album/media/**/*.aif
+# ivo-album/media/**/*.mp3
+
+# Temporary files
+*.tmp
+*.lock
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# IDE/Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo
