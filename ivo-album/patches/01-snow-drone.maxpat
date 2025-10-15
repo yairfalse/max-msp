@@ -86,13 +86,46 @@
 			},
 			{
 				"box" : {
-					"id" : "obj-mixer",
+					"id" : "obj-mix12",
 					"maxclass" : "newobj",
-					"numinlets" : 5,
+					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "signal" ],
-					"patching_rect" : [ 400.0, 340.0, 200.0, 22.0 ],
-					"text" : "+~ +~ +~ +~"
+					"patching_rect" : [ 400.0, 310.0, 32.0, 22.0 ],
+					"text" : "+~"
+				}
+			},
+			{
+				"box" : {
+					"id" : "obj-mix123",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 400.0, 330.0, 32.0, 22.0 ],
+					"text" : "+~"
+				}
+			},
+			{
+				"box" : {
+					"id" : "obj-mix1234",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 400.0, 350.0, 32.0, 22.0 ],
+					"text" : "+~"
+				}
+			},
+			{
+				"box" : {
+					"id" : "obj-mixer",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 400.0, 370.0, 32.0, 22.0 ],
+					"text" : "+~"
 				}
 			},
 			{
@@ -542,7 +575,7 @@
 			},
 			{
 				"patchline" : {
-					"destination" : [ "obj-mixer", 0 ],
+					"destination" : [ "obj-mix12", 0 ],
 					"source" : [ "obj-gain1", 0 ]
 				}
 			},
@@ -572,8 +605,14 @@
 			},
 			{
 				"patchline" : {
-					"destination" : [ "obj-mixer", 1 ],
+					"destination" : [ "obj-mix12", 1 ],
 					"source" : [ "obj-gain2", 0 ]
+				}
+			},
+			{
+				"patchline" : {
+					"destination" : [ "obj-mix123", 0 ],
+					"source" : [ "obj-mix12", 0 ]
 				}
 			},
 			{
@@ -602,8 +641,14 @@
 			},
 			{
 				"patchline" : {
-					"destination" : [ "obj-mixer", 2 ],
+					"destination" : [ "obj-mix123", 1 ],
 					"source" : [ "obj-gain3", 0 ]
+				}
+			},
+			{
+				"patchline" : {
+					"destination" : [ "obj-mix1234", 0 ],
+					"source" : [ "obj-mix123", 0 ]
 				}
 			},
 			{
@@ -632,8 +677,14 @@
 			},
 			{
 				"patchline" : {
-					"destination" : [ "obj-mixer", 3 ],
+					"destination" : [ "obj-mix1234", 1 ],
 					"source" : [ "obj-gain4", 0 ]
+				}
+			},
+			{
+				"patchline" : {
+					"destination" : [ "obj-mixer", 0 ],
+					"source" : [ "obj-mix1234", 0 ]
 				}
 			},
 			{
@@ -662,7 +713,7 @@
 			},
 			{
 				"patchline" : {
-					"destination" : [ "obj-mixer", 4 ],
+					"destination" : [ "obj-mixer", 1 ],
 					"source" : [ "obj-gain5", 0 ]
 				}
 			}
