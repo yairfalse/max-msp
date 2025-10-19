@@ -511,6 +511,260 @@
 , 			{
 				"box" : 				{
 					"fontface" : 1,
+					"id" : "obj-header-broadcasts",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 110.0, 300.0, 20.0 ],
+					"text" : "=== DRUM MACHINE CONTROL ==="
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"id" : "obj-header-randomize",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 240.0, 300.0, 20.0 ],
+					"text" : "=== SMART RANDOMIZE ==="
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-rand-rhythm",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1050.0, 270.0, 40.0, 40.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-comment-rand-rhythm",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1100.0, 275.0, 150.0, 20.0 ],
+					"text" : "Randomize Rhythm Only"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-rand-timbre",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1050.0, 320.0, 40.0, 40.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-comment-rand-timbre",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1100.0, 325.0, 150.0, 20.0 ],
+					"text" : "Randomize Timbre Only"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-rand-all",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1050.0, 370.0, 40.0, 40.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-comment-rand-all",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1100.0, 375.0, 150.0, 20.0 ],
+					"text" : "Chaos Mode (All)"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-send-rand-rhythm",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 420.0, 150.0, 22.0 ],
+					"text" : "s randomize-rhythm"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-send-rand-timbre",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 450.0, 150.0, 22.0 ],
+					"text" : "s randomize-timbre"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
+					"id" : "obj-header-sidechain",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 490.0, 300.0, 20.0 ],
+					"text" : "=== SIDECHAIN DUCKING ==="
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-receive-kick-sc",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 1050.0, 520.0, 100.0, 22.0 ],
+					"text" : "r~ kick-out"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-sidechain-env",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 1050.0, 550.0, 100.0, 22.0 ],
+					"text" : "abs~"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-sidechain-smooth",
+					"maxclass" : "newobj",
+					"numinlets" : 3,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 1050.0, 580.0, 100.0, 22.0 ],
+					"text" : "slide~ 10 100"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-sidechain-scale",
+					"maxclass" : "newobj",
+					"numinlets" : 6,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 1050.0, 610.0, 150.0, 22.0 ],
+					"text" : "scale~ 0. 1. 1. 0.3"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-sidechain-duck-amount",
+					"maxclass" : "flonum",
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "", "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1210.0, 610.0, 60.0, 22.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-comment-duck-amount",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1280.0, 610.0, 100.0, 20.0 ],
+					"text" : "Duck Amount"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-send-master-bpm",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 780.0, 170.0, 100.0, 22.0 ],
+					"text" : "s master-bpm"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-send-master-clock",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 610.0, 200.0, 110.0, 22.0 ],
+					"text" : "s master-clock"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-randomize-button",
+					"maxclass" : "button",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "bang" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 1050.0, 140.0, 40.0, 40.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-randomize-label",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1100.0, 150.0, 150.0, 20.0 ],
+					"text" : "Randomize Drum Patterns"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-send-randomize",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1050.0, 190.0, 130.0, 22.0 ],
+					"text" : "s pattern-randomize"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontface" : 1,
 					"id" : "obj-header-mixer",
 					"maxclass" : "comment",
 					"numinlets" : 1,
@@ -738,6 +992,42 @@
 			}
 , 			{
 				"box" : 				{
+					"id" : "obj-comment-ch6",
+					"maxclass" : "comment",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 630.0, 280.0, 150.0, 20.0 ],
+					"text" : "Channel 6: Drums"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-receive-drums",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 630.0, 310.0, 100.0, 22.0 ],
+					"text" : "r~ drum-out"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"id" : "obj-gain-drums",
+					"maxclass" : "gain~",
+					"multichannelvariant" : 0,
+					"numinlets" : 1,
+					"numoutlets" : 2,
+					"outlettype" : [ "signal", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 630.0, 340.0, 22.0, 140.0 ]
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"id" : "obj-mix4",
 					"maxclass" : "newobj",
 					"numinlets" : 2,
@@ -762,12 +1052,24 @@
 			}
 , 			{
 				"box" : 				{
+					"id" : "obj-mix6",
+					"maxclass" : "newobj",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "signal" ],
+					"patching_rect" : [ 30.0, 650.0, 32.0, 22.0 ],
+					"text" : "+~"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"fontface" : 1,
 					"id" : "obj-header-master",
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 30.0, 650.0, 600.0, 20.0 ],
+					"patching_rect" : [ 30.0, 680.0, 600.0, 20.0 ],
 					"text" : "=== MASTER SECTION ==="
 				}
 
@@ -1636,6 +1938,20 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-gain-drums", 0 ],
+					"source" : [ "obj-receive-drums", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-mix6", 1 ],
+					"source" : [ "obj-gain-drums", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-mix5", 0 ],
 					"source" : [ "obj-mix4", 0 ]
 				}
@@ -1643,8 +1959,15 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-fade-multiply", 0 ],
+					"destination" : [ "obj-mix6", 0 ],
 					"source" : [ "obj-mix5", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-fade-multiply", 0 ],
+					"source" : [ "obj-mix6", 0 ]
 				}
 
 			}
@@ -1864,6 +2187,13 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-send-master-bpm", 0 ],
+					"source" : [ "obj-arp-bpm", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-arp-metro", 1 ],
 					"source" : [ "obj-arp-bpm-to-ms", 0 ]
 				}
@@ -1879,7 +2209,7 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-arp-counter", 0 ],
-					"order" : 1,
+					"order" : 2,
 					"source" : [ "obj-arp-metro", 0 ]
 				}
 
@@ -1887,6 +2217,14 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-arp-random", 0 ],
+					"order" : 1,
+					"source" : [ "obj-arp-metro", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-send-master-clock", 0 ],
 					"order" : 0,
 					"source" : [ "obj-arp-metro", 0 ]
 				}
@@ -2050,6 +2388,13 @@
 				"patchline" : 				{
 					"destination" : [ "obj-arp-send", 0 ],
 					"source" : [ "obj-arp-funnel", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-send-randomize", 0 ],
+					"source" : [ "obj-randomize-button", 0 ]
 				}
 
 			}
