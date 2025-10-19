@@ -1,77 +1,149 @@
-# Max/MSP Album Project
+# IVO Album - Max/MSP Performance System
 
-An experimental ambient music project using Max/MSP patches.
+Cinematic ambient music performance system for "Berlin Autumn" themed album. Features live synthesis, algorithmic drum generation, and integrated effects processing.
 
 ## Project Structure
 
-Max/MSP projects are organized differently than traditional code projects. Here's the recommended structure:
-
 ```
 max-msp/
-├── README.md
-├── patches/           # Main patches (.maxpat files)
-├── abstractions/      # Reusable subpatches
-├── externals/         # Third-party objects/libraries
-├── media/            # Audio samples, recordings
-├── data/             # JSON, text files for data
-├── code/             # JavaScript code for [js] objects
-└── docs/             # Documentation, notes
+└── ivo-album/
+    └── patches/
+        ├── 00-ivo-master-performance.maxpat    # Master control & mixer
+        ├── 01-snow-drone.maxpat                # Drone synthesizer
+        ├── 02-granular-ostinato.maxpat         # Granular processor
+        ├── 03-super-saw.maxpat                 # Supersaw synthesizer
+        ├── 04-live-looper.maxpat               # Live looper
+        ├── 05-glass-shards.maxpat              # Glass shards synth
+        ├── 07-mega-sampler.maxpat              # Autechre FM drum machine
+        ├── euclid.js                           # Euclidean rhythm generator
+        └── ...
 ```
 
-## Max/MSP Concepts for Programmers
+## System Architecture
 
-### Key Differences from Traditional Programming
+### Master Performance Patch (`00-ivo-master-performance.maxpat`)
 
-- **Visual Dataflow**: Instead of text-based code, you connect objects with patch cords. Data flows top-to-bottom, left-to-right.
-- **Hot/Cold Inlets**: Right-to-left evaluation. Rightmost inlet is "cold" (stores value), leftmost is "hot" (triggers computation).
-- **Message Passing**: Objects communicate via messages (like actor model), not function calls.
-- **No Compile Step**: Patches are interpreted in real-time.
+Central hub controlling the entire performance system:
 
-### Object Types
+#### MIDI Input
+- **ROLI Seaboard** - MPE (MIDI Polyphonic Expression) for expressive control
+- **Keystep** - Traditional keyboard input with arpeggiator integration
 
-- **MSP objects** (audio): Start with `~` (e.g., `cycle~`, `filtergraph~`)
-- **Jitter objects** (video/matrix): Start with `jit.` (e.g., `jit.matrix`)
-- **Gen objects** (low-level DSP): `gen~` for sample-level audio processing
-- **JavaScript**: Use `[js]` object to write actual code
+#### 7-Channel Mixer
+1. **Snow Drone** - Ambient drone layer
+2. **Granular Ostinato** - Textural granular synthesis
+3. **Super Saw** - Rich supersaw synth
+4. **Live Looper** - Real-time looping
+5. **Glass Shards** - Crystalline synth textures
+6. **Drums** - Autechre-style FM drum machine
+7. **Master** - Combined output
 
-### Version Control
+#### Master Effects Chain
+- **UAD Lexicon 224** - Reverb (via VST)
+- **UAD Galaxy Tape Echo** - Delay/echo (via VST)
+- Recording output to disk
 
-- `.maxpat` files are JSON - they diff well in git
-- Keep patches organized and modular (like functions/modules)
-- Use abstractions for reusable components (like libraries)
-- Comment your patches (cmd+shift+C creates a comment box)
+#### Performance Controls
+- **Smart Randomization**
+  - Randomize Rhythm Only (keeps timbres)
+  - Randomize Timbre Only (keeps patterns)
+  - Chaos Mode (full randomization)
+- **Sidechain Ducking** - Kick-triggered ducking on pads/drones
+- **Master Clock** - BPM + clock broadcasts to all patches
+- **Pattern Randomizer** - Global bang for generative variation
 
-### Best Practices
+---
 
-1. **Modular Design**: Break complex patches into abstractions (subpatches)
-2. **Naming**: Use clear names for abstractions (like function names)
-3. **Encapsulation**: Use `[patcher]` and `[bpatcher]` to create self-contained modules
-4. **Initialization**: Use `[loadbang]` for startup initialization (like `init()`)
-5. **Error Handling**: Use `[route]` and message filtering to handle edge cases
-6. **Performance**: Audio rate (MSP~) vs control rate (Max) - know the difference
-7. **Documentation**: Add comments and use presentation mode for clean interfaces
+## Autechre FM Drum Machine (`07-mega-sampler.maxpat`)
 
-### Typical Workflow
+Algorithmic 4-voice FM percussion synthesizer with generative sequencing.
 
-1. Create main patch in `patches/`
-2. Build and test incrementally (like TDD but interactive)
-3. Extract reusable parts into `abstractions/`
-4. Add JavaScript for complex logic in `code/`
-5. Save presets using `[preset]` object
+### Features
 
-### Learning Resources
+#### Synthesis Engines
+- **Kick** - 2-operator FM with pitch envelope sweep (800Hz → base) + tanh~ distortion
+- **Snare** - 2-operator FM + band-pass filtered noise (SVF~ 2000Hz)
+- **Hi-hat** - 3-operator metallic FM + high-pass filtered noise (SVF~ 8000Hz)
+- **Perc** - 2-operator with full algorithmic randomization (freq 200-2200Hz)
 
-- Max/MSP documentation: In-app help (alt+click any object)
-- Tutorial patches: File → New From Template
-- Forums: cycling74.com/forums
+#### Sequencing
+- **Euclidean Rhythm Generation** - Bjorklund's algorithm via `euclid.js`
+  - Independent steps (1-16) and pulses (1-16) per voice
+  - Mathematically distributed beat patterns
+- **Probability Gates** - Per-voice probability (0-1) for stochastic triggering
+- **Master Clock Sync** - Receives BPM and clock from master patch
 
-## Getting Started
+#### Modulation
+- **Per-Voice LFOs** - 4 independent LFOs modulating FM index/ratio
+  - Rate controls (Hz): 0.05-1.0Hz typical
+  - Depth controls for modulation amount
+  - Creates evolving, breathing timbres (very Autechre)
+- **Algorithmic Drift** - Random parameter variation on perc voice
 
-Open Max/MSP and start with a patch in the `patches/` directory.
+#### Performance Tools
+- **16-Slot Preset System** - Pattern save/recall with `pattrstorage`
+- **Visual Step Indicator** - 16-step display with current position highlight
+- **LED Feedback** - 4 colored LEDs (kick/snare/hihat/perc) show active drums
+- **Individual Outputs** - Separate sends (`kick-out`, `snare-out`, etc.) for routing
 
-### Project Goals
+#### Routing
+- `r master-bpm` - Tempo from master
+- `r master-clock` - Clock ticks from master
+- `r pattern-randomize` - Randomization trigger
+- `s~ drum-out` - Main drum mix to master
+- `s~ kick-out`, `s~ snare-out`, etc. - Individual drum outputs
 
-- Experimental ambient music creation
-- Break away from modular synth / DAW workflow
-- Explore generative and algorithmic techniques
-- Create unique textures and soundscapes
+---
+
+## Performance Workflow
+
+1. **Start Master Patch** - `00-ivo-master-performance.maxpat`
+2. **Set BPM** - Adjust master tempo (broadcast to all patches)
+3. **Load Drum Pattern** - Recall preset 1-16 or create new pattern
+4. **Adjust Euclidean Rhythms** - Steps/pulses per voice
+5. **Tweak Probabilities** - Add stochastic variation (0-1)
+6. **Modulate with LFOs** - Adjust rate/depth for movement
+7. **Layer Synths** - Bring in drones, pads, textures via mixer
+8. **Randomize** - Use smart randomization buttons for instant variation
+9. **Record** - Hit record button to capture performance
+
+---
+
+## Technical Details
+
+### Dependencies
+- Max/MSP 8.5+
+- **Vanilla Max objects only** (no external dependencies)
+- UAD Powered Plug-Ins (optional, for reverb/delay)
+
+### Key Algorithms
+- **Bjorklund's Euclidean Rhythm** - `euclid.js` (106 lines)
+- **FM Synthesis** - 2-op and 3-op configurations
+- **Envelope Followers** - For sidechain ducking
+- **State-Variable Filters** - `svf~` for resonant filtering
+
+### Audio Routing
+- `send~` / `receive~` for all audio connections
+- Individual channel gains via `gain~` objects
+- Master gain and output to `ezdac~` or recording
+
+---
+
+## Quick Start
+
+1. Open `00-ivo-master-performance.maxpat`
+2. Turn on audio (click speaker icon)
+3. Set BPM to desired tempo
+4. Open drum machine (`07-mega-sampler.maxpat`)
+5. Adjust mixer levels for each channel
+6. Hit the master clock randomize button for instant patterns
+7. Tweak Euclidean parameters and probabilities
+8. Save patterns to presets (1-16)
+
+---
+
+## Credits
+
+Built with Max/MSP 8.6
+Performance system for "Berlin Autumn" album
+Inspired by Autechre's approach to algorithmic FM percussion
